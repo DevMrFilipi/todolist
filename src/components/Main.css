@@ -1,0 +1,47 @@
+.main {
+  background: #fff;
+  padding: 30px;
+  margin: 50px auto;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);
+}
+
+.main h1 {
+  font-size: 20px;
+  margin: 5px 2px;
+}
+
+.main button {
+  margin: auto 5px;
+  align-items: center;
+  width: 20px;
+}
+
+.main button svg {
+  align-items: center;
+  width: 17.328px;
+  height: 10px;
+}
+
+.main form {
+  margin: 5px auto;
+}
+
+.taskContainer p {
+  width: auto;
+  height: 25px;
+  margin: 10px auto;
+  text-align: left;
+  background-color: rgb(216, 216, 216);
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.taskContainer a {
+  padding: 5px 5px 0px;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: bold;
+}
