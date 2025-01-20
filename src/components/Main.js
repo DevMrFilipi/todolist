@@ -1,52 +1,71 @@
 // import "./Main.css"
 import React, { Component } from 'react';
 
-import { FaPlus } from 'react-icons/fa';
+import { FaEdit, FaPlus, FaWindowClose } from 'react-icons/fa';
 
 import './Main.css';
 
 export default class Main extends Component {
-  state = {
-    newTask: '',
-    counter: 1,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      newTask: '',
+      tasks: [],
+    };
 
-  contador = (counter) => {
-    counter = counter + 1;
-    return counter;
-  };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  handleSubmit = (e) => {
-    let inputMain = document.querySelector('.inputMain');
+  handleSubmit(e) {
+    e.preventDefault();
+    let { newTask } = this.state;
+    const { tasks } = this.state;
+    newTask = newTask.trim();
+
+    if (tasks.indexOf(newTask) !== -1) return;
+
+    const newsTasks = [...tasks];
+
+    this.setState({
+      tasks: [...newsTasks, newTask],
+    });
+  }
+
+  handleChange(e) {
     this.setState({
       newTask: e.target.value,
-      counter: this.contador(this.state.counter),
     });
-    this.componentGenerate(inputMain.value);
-    inputMain.value = '';
-    return;
-  };
-
-  componentGenerate = (task) => {
-    const taskContainer = document.querySelector('.taskContainer');
-    const taskComponent = document.createElement('p');
-    const textTaskComponent = document.createElement('a');
-    textTaskComponent.innerHTML += `${this.state.counter} | ${task}`;
-    taskComponent.appendChild(textTaskComponent);
-    taskContainer.appendChild(taskComponent);
-  };
+  }
 
   render() {
+    const { newTask, tasks } = this.state;
     return (
       <div className="main">
         <h1>Lista de Tarefas</h1>
-        <form action="#">
-          <input className="inputMain"></input>
-          <button type="submit" onClick={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} action="#" className="form">
+          <input
+            className="inputMain"
+            type="text"
+            onChange={this.handleChange}
+            value={newTask}
+          ></input>
+          <button type="submit">
             <FaPlus />
           </button>
         </form>
-        <div className="taskContainer"></div>
+
+        <ul className="tasks">
+          {tasks.map((task) => (
+            <li key={task}>
+              {task}
+              <span>
+                <FaEdit className="edit" />
+                <FaWindowClose className="delete" />
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
